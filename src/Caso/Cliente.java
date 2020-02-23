@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class Cliente extends Thread {
 
+	/**
+	 * 
+	 */
+
 
 	/**
 	 * Buffer para enviar mensaje a los servidores
@@ -37,7 +41,9 @@ public class Cliente extends Thread {
 			}
 			try	{
 				synchronized(mensaje) {
-					mensaje.wait();	
+					
+					mensaje.esperar();
+					mensaje.wait();
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();

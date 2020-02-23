@@ -1,12 +1,12 @@
 package Caso;
 
 public class Servidor extends Thread {
-	
+
 	/**
 	 * Buffer desde el cual se reciben peticiones.
 	 */
 	private Buffer buffer;
-	
+
 	/**
 	 * Constructor del Servidor.
 	 * @param pBuffer buffer del cual se reciben peticiones.
@@ -14,7 +14,7 @@ public class Servidor extends Thread {
 	public Servidor(Buffer pBuffer) {
 		buffer = pBuffer;
 	}
-	
+
 	/**
 	 * Método run del thread. Saca mensajes y los resuelve hasta que no haya más clientes.
 	 */
@@ -22,13 +22,18 @@ public class Servidor extends Thread {
 		Mensaje msj;
 		while((msj = buffer.sacarMensaje()) != null || buffer.existenClientes()) {
 			if(msj == null) {
-				System.out.println("SERVIDOR>> No hay mensajes");
 				yield();
 			} else { 
-				System.out.println("SERVIDOR>> Se modifico el mensaje "+msj);				
 				msj.setMensaje(msj.getMensaje() + 1);
+
+				while(!msj.estaEsperando()) {}
+
 				synchronized(msj) {
+
 					msj.notify();
+
+					msj.despertar();
+
 				}
 			}
 		}

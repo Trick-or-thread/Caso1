@@ -87,7 +87,6 @@ public class Buffer {
 	 */
 	public boolean existenClientes() {
 		synchronized(bolsaModificarClientes) {
-			System.out.println(numeroClientes);
 			return numeroClientes > 0 ? true : false;
 		}
 	}
