@@ -24,5 +24,10 @@ public class Mensaje {
 		
 		consulta = pValor;
 	}
+	
+	public int getMensaje() {
+		
+		return consulta;
+	}
 
 }
