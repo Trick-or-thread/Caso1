@@ -10,7 +10,7 @@ public class Servidor extends Thread {
 	}
 	
 	public void leer() {
-
+		
 		Mensaje msj = null;
 		
 		while((msj = buffer.sacarMensaje()) == null) {
@@ -23,8 +23,12 @@ public class Servidor extends Thread {
 		System.out.println("SERVIDOR>> Lectura del mensaje:"+msj);
 		
 		msj.setMensaje(msj.getMensaje() + 1);
-		
 		msj.notify();
-		
+	}
+	
+	public void run() {
+		while(buffer.existenClientes()) {
+			leer();
+		}
 	}
 }
