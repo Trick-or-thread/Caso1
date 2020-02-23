@@ -42,8 +42,10 @@ public class Buffer {
 	 */
 	public synchronized boolean dejarMensaje(Mensaje m) {
 		if(buff.size() >= n) {
+			System.out.println("BUFFER >> EL BUFFER ESTA LLENO INTENTO FALLIDO DE DEJAR EL MENSAJE "+m.getMensaje()+"  |  "+m);			
 			return false;
 		} else {
+			System.out.println("BUFFER >> SE AGREGO EXITOSAMENTE AL BUFFER EL MENSAJE "+m.getMensaje()+"  |  "+m);
 			buff.add(m);
 			return true;
 		}
@@ -55,9 +57,11 @@ public class Buffer {
 	 */
 	public synchronized Mensaje sacarMensaje() {
 		if(buff.size( ) == 0) {
+			System.out.println("BUFFER >> EL BUFFER ESTA VACIO INTENTO FALLIDO DE SACAR MENSAJE POR PARTE DEL SERVIDOR");			
 			return null;
 		} else {
 			Mensaje m = buff.pop();
+			System.out.println("BUFFER >> EL SERVIDOR EXTRAJO EXITOSAMENTE DEL BUFFER EL MENSAJE "+m.getMensaje()+"  |  "+m);
 			return m;
 		}
 	}
@@ -67,7 +71,7 @@ public class Buffer {
 	 */
 	public void entrarCliente() {
 		synchronized(bolsaModificarClientes) {	
-			System.out.println("BUFFER>> Ingreso un cliente");
+			System.out.println("BUFFER >> INGRESO DE UN CLIENTE, CANTIDAD DE CLIENTES: "+(numeroClientes+1));
 			numeroClientes++;
 		}
 	}
@@ -77,6 +81,7 @@ public class Buffer {
 	 */
 	public void salirCliente() {
 		synchronized(bolsaModificarClientes) {
+			System.out.println("BUFFER >> SALIDA DE UN CLIENTE, CANTIDAD DE CLIENTES: "+(numeroClientes-1));
 			numeroClientes--;
 		}
 	}

@@ -3,12 +3,7 @@ package Caso;
 import java.util.Random;
 
 public class Cliente extends Thread {
-
-	/**
-	 * 
-	 */
-
-
+	
 	/**
 	 * Buffer para enviar mensaje a los servidores
 	 */
@@ -38,12 +33,16 @@ public class Cliente extends Thread {
 			Mensaje mensaje = new Mensaje(new Random().nextInt());
 			while (!buffer.dejarMensaje(mensaje)) {
 				yield();		
+				
+				System.out.println("CLIENTE >> INTENTO FALLIDO DE DEJAR EN EL BUFFER EL MENSAJE "+mensaje.getMensaje()+"  |  "+mensaje);
 			}
 			try	{
 				synchronized(mensaje) {
 					
 					mensaje.esperar();
+					System.out.println("CLIENTE >> A LA ESPERA DE RECEPCION DE RESPUESTA DE MENSAJE "+mensaje.getMensaje()+"  |  "+mensaje);
 					mensaje.wait();
+					System.out.println("CLIENTE >> RESPUESTA DEL SERVIDOR MEDIANTE EL BUFFER "+mensaje.getMensaje()+"  |  "+mensaje);
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
