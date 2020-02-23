@@ -6,7 +6,7 @@ public class Main {
 		
 		Buffer buffer = new Buffer(2);
 		for(int i = 0; i < 10; i++) {
-			Cliente cliente = new Cliente(buffer);
+			Cliente cliente = new Cliente(buffer, 5);
 			cliente.start();
 		}
 		for(int i = 0; i < 5; i++) {

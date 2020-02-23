@@ -19,14 +19,17 @@ public class Cliente extends Thread {
 	 * Metodo constructor del cliente	
 	 * @param pBuffer Buffer para enviar mensaje a los servidores
 	 */
-	public Cliente(Buffer pBuffer) {
+	public Cliente(Buffer pBuffer, int pCantidadMensajes) {
 		buffer = pBuffer;
+		
+		cantidadMensajes = pCantidadMensajes;
 	}
 
 	/**
 	 * Metodo para enviar un mensaje al buffer, si no lo logra permanece en espera activa.
 	 */	
 	public void enviar(Mensaje mensaje) {
+				
 		while (!buffer.dejarMensaje(mensaje)) {
 			
 			System.out.println("CLIENTE>> Esperando para enviar: "+mensaje);
