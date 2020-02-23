@@ -10,6 +10,16 @@ public class Buffer {
 	private LinkedList<Mensaje> buff;
 	
 	/**
+	 * Número de clientes circulando actualmente.
+	 */
+	private int numeroClientes;
+	
+	/**
+	 * Bolsa que evita que más de un thread modifique la variable "númeroClientes".
+	 */
+	private Object bolsaModificarClientes;
+	
+	/**
 	 * Cantidad máxima de mensajes que pueden estar en la lista de espera.
 	 */
 	private int n;
@@ -32,7 +42,7 @@ public class Buffer {
 		if(buff.size() >= n) {
 			return false;
 		} else {
-			buff.push(m);
+			buff.add(m);
 			return true;
 		}
 	}
@@ -47,6 +57,31 @@ public class Buffer {
 		} else {
 			return buff.pop();
 		}
+	}
+	
+	/**
+	 * Método que le informa al buffer que un nuevo cliente entró a hacer peticiones.
+	 */
+	public void entrarCliente() {
+		synchronized(bolsaModificarClientes) {
+			numeroClientes++;
+		}
+	}
+	
+	/**
+	 * Método que le informa al buffer que un cliente dejó de hacer peticiones.
+	 */
+	public void salirCliente() {
+		synchronized(bolsaModificarClientes) {
+			numeroClientes--;
+		}
+	}
+	
+	/**
+	 * Método que informa a un servidor que aún existen clientes haciendo peticiones.
+	 */
+	public boolean existenClientes() {
+		return numeroClientes > 0 ? true : false;
 	}
 	
 }
