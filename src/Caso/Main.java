@@ -6,6 +6,11 @@ import java.util.Properties;
 
 public class Main {
 
+	/**
+	 * Método main que carga el archivo desde una ruta predeterminada y luego inicia un protocolo de
+	 * productor consumidor según los parámetros.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		File seleccionado = new File("./data/datos.properties");
@@ -33,7 +38,6 @@ public class Main {
 		int servidores = Integer.parseInt(propiedades.getProperty("caso.servidores"));	
 		
 		
-	
 		Buffer buffer = new Buffer(buffersize);
 		for(int i = 0; i < clientes; i++) {
 			Cliente cliente = new Cliente(buffer, mensajesporcliente);

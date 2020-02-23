@@ -7,6 +7,9 @@ public class Mensaje {
 	 */
 	private int consulta;
 	
+	/**
+	 * Determina si ya el cliente se puede despertar desde el mensaje.
+	 */
 	private boolean esperando;
 	
 	
@@ -21,16 +24,26 @@ public class Mensaje {
 		esperando = false;
 	}	
 	
+	/**
+	 * Método que asegura que ya se puede despertar.
+	 */
 	public void esperar() {
 		
 		esperando = true;		
 	}
 	
+	/**
+	 * Método a invocar cuando ya se despertó.
+	 */
 	public void despertar() {
 		
 		esperando = false;
 	}
 	
+	/**
+	 * Método que determina si se está esperando para ser despertado.
+	 * @return true si está esperando, false si no.
+	 */
 	public boolean estaEsperando() {
 		
 		return esperando;
@@ -44,6 +57,10 @@ public class Mensaje {
 		consulta = pValor;
 	}
 	
+	/**
+	 * Método que retorna el contenido mensaje.
+	 * @return el contenido del mensaje.
+	 */
 	public int getMensaje() {
 		
 		return consulta;
