@@ -31,9 +31,18 @@ public class Cliente extends Thread {
 	 */	
 	public void enviar() {
 		
-		while (!buffer.dejarMensaje(mensaje)) {}
+		while (!buffer.dejarMensaje(mensaje)) {
+			
+			yield();
+			
+		}
 		
+		try	{
+			
+		mensaje.wait();
+		
+		} catch (InterruptedException e) {}
 	}
-		
+	
 		
 }
