@@ -61,7 +61,7 @@ public class Cliente extends Thread {
 		buffer.entrarCliente();
 		for(int i = 0; i < cantidadMensajes; i++) {
 			
-			Mensaje mensaje = new Mensaje(new Random().nextInt(), this);
+			Mensaje mensaje = new Mensaje(new Random().nextInt());
 			enviar(mensaje);
 		}
 		buffer.salirCliente();

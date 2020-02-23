@@ -22,8 +22,11 @@ public class Servidor extends Thread {
 		Mensaje msj;
 		while((msj = buffer.sacarMensaje()) != null || buffer.existenClientes()) {
 			if(msj == null) {
+				System.out.println("SERVIDOR>> No hay mensajes");
 				yield();
 			} else { 
+				
+				System.out.println("SERVIDOR>> Se modifico el mensaje "+msj);				
 				msj.setMensaje(msj.getMensaje() + 1);
 				synchronized(msj) {
 					msj.notify();

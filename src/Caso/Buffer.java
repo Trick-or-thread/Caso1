@@ -29,6 +29,7 @@ public class Buffer {
 	 * @param n tamaño del buffer.
 	 */
 	public Buffer(int n) {
+		numeroClientes = 0;
 		this.n = n;
 		buff = new LinkedList<>();
 	}
@@ -76,31 +77,29 @@ public class Buffer {
 	/**
 	 * Método que le informa al buffer que un nuevo cliente entró a hacer peticiones.
 	 */
-	public void entrarCliente() {
-		synchronized(bolsaModificarClientes) {
+	public synchronized void entrarCliente() {
 			
 			System.out.println("BUFFER>> Ingreso un cliente");
 			
 			numeroClientes++;
-		}
+	
 	}
 	
 	/**
 	 * Método que le informa al buffer que un cliente dejó de hacer peticiones.
 	 */
-	public void salirCliente() {
-		synchronized(bolsaModificarClientes) {
+	public synchronized void salirCliente() {
 			
 			System.out.println("BUFFER>> Salio un cliente");
 			numeroClientes--;
-		}
+		
 	}
 	
 	/**
 	 * Método que informa a un servidor que aún existen clientes haciendo peticiones.
 	 * @return true si aún hay clientes haciendo peticiones, false si no.
 	 */
-	public boolean existenClientes() {
+	public synchronized boolean existenClientes() {
 		return numeroClientes > 0 ? true : false;
 	}
 	
