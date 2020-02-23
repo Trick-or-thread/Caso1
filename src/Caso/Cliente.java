@@ -42,10 +42,12 @@ public class Cliente extends Thread {
 	 */
 	@Override
 	public void run() {
+		buffer.entrarCliente();
 		for(int i = 0; i < cantidadMensajes; i++) {
 			Mensaje mensaje = new Mensaje(new Random().nextInt());
 			enviar(mensaje);
-		}		
+		}
+		buffer.salirCliente();
 	}
 
 }

@@ -10,17 +10,17 @@ public class Servidor extends Thread {
 	}
 	
 	public void leer() {
-
-		Mensaje msj = null;
-		
-		while((msj = buffer.sacarMensaje()) == null) {
-			
-			yield();			
+		Mensaje msj;
+		while((msj = buffer.sacarMensaje()) == null) {	
+			yield();
 		}
-		
 		msj.setMensaje(msj.getMensaje() + 1);
-		
 		msj.notify();
-		
+	}
+	
+	public void run() {
+		while(buffer.existenClientes()) {
+			leer();
+		}
 	}
 }
