@@ -40,8 +40,12 @@ public class Buffer {
 	 */
 	public synchronized boolean dejarMensaje(Mensaje m) {
 		if(buff.size() >= n) {
+			
+			System.out.println("BUFFER>> Rechazado mensaje: "+m);
+			
 			return false;
 		} else {
+			System.out.println("BUFFER>> Recibido mensaje: "+m);
 			buff.add(m);
 			return true;
 		}
@@ -53,9 +57,17 @@ public class Buffer {
 	 */
 	public synchronized Mensaje sacarMensaje() {
 		if(buff.size( ) == 0) {
+			
+			System.out.println("BUFFER>> El servidor intento leer, no hay mensajes");
+			
 			return null;
 		} else {
-			return buff.pop();
+			
+			Mensaje m = buff.pop();
+			
+			System.out.println("BUFFER>> El servidor lee: "+m);
+			
+			return m
 		}
 	}
 	
@@ -64,6 +76,9 @@ public class Buffer {
 	 */
 	public void entrarCliente() {
 		synchronized(bolsaModificarClientes) {
+			
+			System.out.println("BUFFER>> Ingreso un cliente");
+			
 			numeroClientes++;
 		}
 	}
@@ -73,6 +88,8 @@ public class Buffer {
 	 */
 	public void salirCliente() {
 		synchronized(bolsaModificarClientes) {
+			
+			System.out.println("BUFFER>> Salio un cliente");
 			numeroClientes--;
 		}
 	}

@@ -15,8 +15,12 @@ public class Servidor extends Thread {
 		
 		while((msj = buffer.sacarMensaje()) == null) {
 			
+			System.out.println("SERVIDOR>> Intento fallido de sacar un mensaje.");
+			
 			yield();			
 		}
+		
+		System.out.println("SERVIDOR>> Lectura del mensaje:"+msj);
 		
 		msj.setMensaje(msj.getMensaje() + 1);
 		

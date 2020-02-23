@@ -28,10 +28,18 @@ public class Cliente extends Thread {
 	 */	
 	public void enviar(Mensaje mensaje) {
 		while (!buffer.dejarMensaje(mensaje)) {
+			
+			System.out.println("CLIENTE>> Esperando para enviar: "+mensaje);
 			yield();	
+			
 		}
 		try	{
+			
+			System.out.println("CLIENTE>> Enviado: "+mensaje+" | Valor: "+mensaje.getMensaje());
+			
 			mensaje.wait();
+			
+			System.out.println("CLIENTE>> Recibido: "+mensaje);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
