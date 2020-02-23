@@ -28,7 +28,7 @@ public class Buffer {
 	 * @param m mensaje a dejar.
 	 * @return true si se logró dejar el mensaje, false si no.
 	 */
-	private synchronized boolean dejarMensaje(Mensaje m) {
+	public synchronized boolean dejarMensaje(Mensaje m) {
 		if(buff.size() >= n) {
 			return false;
 		} else {
