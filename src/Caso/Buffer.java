@@ -17,7 +17,7 @@ public class Buffer {
 	/**
 	 * Bolsa que evita que más de un thread modifique la variable "númeroClientes".
 	 */
-	private Object bolsaModificarClientes;
+	private Object bolsaModificarClientes = new Object();
 	
 	/**
 	 * Cantidad máxima de mensajes que pueden estar en la lista de espera.
