@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Cliente extends Thread {
 
-
+	
 	/**
 	 * Buffer para enviar mensaje a los servidores
 	 */
@@ -40,7 +40,12 @@ public class Cliente extends Thread {
 			
 			System.out.println("CLIENTE>> Enviado: "+mensaje+" | Valor: "+mensaje.getMensaje());
 			
-			mensaje.wait();
+			synchronized (mensaje) {
+				
+				mensaje.wait();
+				
+			}	
+			
 			
 			System.out.println("CLIENTE>> Recibido: "+mensaje+"| Valor: "+mensaje.getMensaje());
 		} catch (InterruptedException e) {
@@ -55,7 +60,8 @@ public class Cliente extends Thread {
 	public void run() {
 		buffer.entrarCliente();
 		for(int i = 0; i < cantidadMensajes; i++) {
-			Mensaje mensaje = new Mensaje(new Random().nextInt());
+			
+			Mensaje mensaje = new Mensaje(new Random().nextInt(), this);
 			enviar(mensaje);
 		}
 		buffer.salirCliente();

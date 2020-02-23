@@ -41,6 +41,8 @@ public class Buffer {
 	public synchronized boolean dejarMensaje(Mensaje m) {
 		if(buff.size() >= n) {
 			
+			System.out.println(buff.size() +"    "+n);
+			
 			System.out.println("BUFFER>> Rechazado mensaje: "+m);
 			
 			return false;

@@ -5,14 +5,22 @@ public class Mensaje {
 	/**
 	 * Valor de la consulta.
 	 */
-	int consulta;
+	private int consulta;
+	
+	private Cliente cliente;	
 	
 	/**
 	 * Constructor del mensaje
 	 * @param pConsulta Valor de la consulta
 	 */
-	public Mensaje(int pConsulta) {
+	public Mensaje(int pConsulta, Cliente pCliente) {
 		consulta = pConsulta;
+		cliente = pCliente;
+	}	
+	
+	public Cliente getCliente() {
+		
+		return cliente;
 	}
 	
 	/**
