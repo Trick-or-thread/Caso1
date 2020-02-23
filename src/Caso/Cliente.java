@@ -4,13 +4,13 @@ import java.util.Random;
 
 public class Cliente extends Thread {
 	
-	int consulta;
+	Mensaje mensaje;
 	
 	Buffer buffer;
 	
 	public Cliente(Buffer pBuffer) {
 		
-		consulta = new Random().nextInt();
+		mensaje = new Mensaje( new Random().nextInt());
 		
 		buffer = pBuffer;
 		
