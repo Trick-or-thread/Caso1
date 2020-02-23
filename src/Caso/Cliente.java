@@ -39,7 +39,7 @@ public class Cliente extends Thread {
 			
 			mensaje.wait();
 			
-			System.out.println("CLIENTE>> Recibido: "+mensaje);
+			System.out.println("CLIENTE>> Recibido: "+mensaje+"| Valor: "+mensaje.getMensaje());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

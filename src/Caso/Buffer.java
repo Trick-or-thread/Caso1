@@ -67,7 +67,7 @@ public class Buffer {
 			
 			System.out.println("BUFFER>> El servidor lee: "+m);
 			
-			return m
+			return m;
 		}
 	}
 	
