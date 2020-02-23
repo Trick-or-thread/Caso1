@@ -4,37 +4,24 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-
-public class Main extends JFrame {
-
-	/**
-	 * Serial
-	 */
-	private static final long serialVersionUID = 1L;
+public class Main {
 
 	public static void main(String[] args) {
 
-		Main esto = new Main();
-
-		JFileChooser chooser = new JFileChooser( "./data/" );
-		chooser.setDialogTitle( "Seleccionar datos" );
-		int resultado = chooser.showOpenDialog(esto);
+		File seleccionado = new File("./data/datos.properties");
 
 		Properties propiedades = new Properties( );
-
-
-		if( resultado == JFileChooser.APPROVE_OPTION )
-		{
-			File seleccionado = chooser.getSelectedFile( );
-			try {
-				propiedades.load( new FileInputStream( seleccionado ) );
-			}
-			catch(Exception e) {
-				
-				e.printStackTrace();
-			}
+		
+		try {
+			
+			FileInputStream x = new FileInputStream(seleccionado);
+			
+			propiedades.load(x);
+			
+			x.close();
+			
+		} catch (Exception e) {
+			
 		}
 		
 		int buffersize = Integer.parseInt(propiedades.getProperty("caso.buffersize"));
@@ -46,6 +33,7 @@ public class Main extends JFrame {
 		int servidores = Integer.parseInt(propiedades.getProperty("caso.servidores"));	
 		
 		
+	
 		Buffer buffer = new Buffer(buffersize);
 		for(int i = 0; i < clientes; i++) {
 			Cliente cliente = new Cliente(buffer, mensajesporcliente);
