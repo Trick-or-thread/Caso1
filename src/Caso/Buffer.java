@@ -1,13 +1,13 @@
 package Caso;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Buffer {
 	
 	/**
 	 * Mensajes listos para consumir.
 	 */
-	private ArrayList<Mensaje> buff;
+	private LinkedList<Mensaje> buff;
 	
 	/**
 	 * Cantidad máxima de mensajes que pueden estar en la lista de espera.
@@ -20,7 +20,7 @@ public class Buffer {
 	 */
 	public Buffer(int n) {
 		this.n = n;
-		buff = new ArrayList<>();
+		buff = new LinkedList<>();
 	}
 	
 	/**
@@ -32,8 +32,20 @@ public class Buffer {
 		if(buff.size() >= n) {
 			return false;
 		} else {
-			buff.add(m);
+			buff.push(m);
 			return true;
+		}
+	}
+	
+	/**
+	 * Método que permite a un servidor sacar un mensaje.
+	 * @return un mensaje si existe alguno en la lista, null si no.
+	 */
+	public synchronized Mensaje sacarMensaje() {
+		if(buff.size( ) == 0) {
+			return null;
+		} else {
+			return buff.pop();
 		}
 	}
 	
