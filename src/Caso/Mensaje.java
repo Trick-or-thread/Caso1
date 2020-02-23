@@ -12,7 +12,6 @@ public class Mensaje {
 	 * @param pConsulta Valor de la consulta
 	 */
 	public Mensaje(int pConsulta) {
-		
 		consulta = pConsulta;
 	}
 	
@@ -21,7 +20,6 @@ public class Mensaje {
 	 * @param pValor Valor que va a tomar consulta
 	 */	
 	public void setMensaje(int pValor) {
-		
 		consulta = pValor;
 	}
 
