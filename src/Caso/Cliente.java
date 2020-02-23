@@ -10,13 +10,14 @@ public class Cliente extends Thread {
 	
 	public Cliente(Buffer pBuffer) {
 		
-		mensaje = new Mensaje( new Random().nextInt());
+		mensaje = new Mensaje(new Random().nextInt());
 		
 		buffer = pBuffer;
 		
 	}
 	
 	public void enviar() {
+		
 		
 		
 	}
