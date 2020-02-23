@@ -79,6 +79,7 @@ public class Buffer {
 	
 	/**
 	 * Método que informa a un servidor que aún existen clientes haciendo peticiones.
+	 * @return true si aún hay clientes haciendo peticiones, false si no.
 	 */
 	public boolean existenClientes() {
 		return numeroClientes > 0 ? true : false;
