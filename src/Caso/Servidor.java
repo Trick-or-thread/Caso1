@@ -25,7 +25,6 @@ public class Servidor extends Thread {
 				System.out.println("SERVIDOR>> No hay mensajes");
 				yield();
 			} else { 
-				
 				System.out.println("SERVIDOR>> Se modifico el mensaje "+msj);				
 				msj.setMensaje(msj.getMensaje() + 1);
 				synchronized(msj) {

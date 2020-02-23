@@ -17,7 +17,7 @@ public class Buffer {
 	/**
 	 * Bolsa que evita que más de un thread modifique la variable "númeroClientes".
 	 */
-	private Object bolsaModificarClientes = new Object();
+	private Object bolsaModificarClientes;
 	
 	/**
 	 * Cantidad máxima de mensajes que pueden estar en la lista de espera.
@@ -29,8 +29,9 @@ public class Buffer {
 	 * @param n tamaño del buffer.
 	 */
 	public Buffer(int n) {
-		numeroClientes = 0;
 		this.n = n;
+		numeroClientes = 0;
+		bolsaModificarClientes = new Object();
 		buff = new LinkedList<>();
 	}
 	
@@ -41,14 +42,8 @@ public class Buffer {
 	 */
 	public synchronized boolean dejarMensaje(Mensaje m) {
 		if(buff.size() >= n) {
-			
-			System.out.println(buff.size() +"    "+n);
-			
-			System.out.println("BUFFER>> Rechazado mensaje: "+m);
-			
 			return false;
 		} else {
-			System.out.println("BUFFER>> Recibido mensaje: "+m);
 			buff.add(m);
 			return true;
 		}
@@ -60,16 +55,9 @@ public class Buffer {
 	 */
 	public synchronized Mensaje sacarMensaje() {
 		if(buff.size( ) == 0) {
-			
-			System.out.println("BUFFER>> El servidor intento leer, no hay mensajes");
-			
 			return null;
 		} else {
-			
 			Mensaje m = buff.pop();
-			
-			System.out.println("BUFFER>> El servidor lee: "+m);
-			
 			return m;
 		}
 	}
@@ -77,30 +65,31 @@ public class Buffer {
 	/**
 	 * Método que le informa al buffer que un nuevo cliente entró a hacer peticiones.
 	 */
-	public synchronized void entrarCliente() {
-			
+	public void entrarCliente() {
+		synchronized(bolsaModificarClientes) {	
 			System.out.println("BUFFER>> Ingreso un cliente");
-			
 			numeroClientes++;
-	
+		}
 	}
 	
 	/**
 	 * Método que le informa al buffer que un cliente dejó de hacer peticiones.
 	 */
-	public synchronized void salirCliente() {
-			
-			System.out.println("BUFFER>> Salio un cliente");
+	public void salirCliente() {
+		synchronized(bolsaModificarClientes) {
 			numeroClientes--;
-		
+		}
 	}
 	
 	/**
 	 * Método que informa a un servidor que aún existen clientes haciendo peticiones.
 	 * @return true si aún hay clientes haciendo peticiones, false si no.
 	 */
-	public synchronized boolean existenClientes() {
-		return numeroClientes > 0 ? true : false;
+	public boolean existenClientes() {
+		synchronized(bolsaModificarClientes) {
+			System.out.println(numeroClientes);
+			return numeroClientes > 0 ? true : false;
+		}
 	}
 	
 }
