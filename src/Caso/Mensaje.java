@@ -22,5 +22,10 @@ public class Mensaje {
 	public void setMensaje(int pValor) {
 		consulta = pValor;
 	}
+	
+	public int getMensaje() {
+		
+		return consulta;
+	}
 
 }
